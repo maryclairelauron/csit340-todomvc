@@ -3,6 +3,7 @@ import { useState } from 'react'
 function Todos() {
     const [text, setText] = useState('')
     const [todos, setTodos] = useState([])
+    const activeCount = todos.filter((todo) => !todo.completed).length
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -27,6 +28,8 @@ function Todos() {
   function handleDelete(id) {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
+
+   
 
   return (
     <section className="mx-auto max-w-[550px]">
@@ -89,8 +92,9 @@ function Todos() {
         </main>
 
         <footer className="grid h-10 grid-cols-3 items-center border-t border-[#e6e6e6] px-[15px] text-[15px]">
-          <span>
-            <strong className="font-light">1</strong> item left
+            <span>
+                <strong className="font-light">{activeCount}</strong>{' '}
+                {activeCount === 1 ? 'item' : 'items'} left
           </span>
           <ul className="flex justify-center gap-1">
             <li>
